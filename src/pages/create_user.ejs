@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../public/images/icons/icon_principal.ico">
+    <link rel="stylesheet" href="../public/CSS/user_css/create.css">
+    <title>Criar usuário</title>
+</head>
+<body>
+    <div class="container-form">
+        <form method="post" action="/create-user">
+            <h1>Crie seu usuário</h1>
+
+            <div class="container-input">
+                <input type="text" name="name" id="name" placeholder="User">
+                <input type="text" name="password" id="password" placeholder="password">
+                <!--<input type="text" name="password_confirmation" id="password_confirmation" placeholder="confirm password">-->
+                <input type="submit" value="Criar">
+            </div>
+        </form>
+    </div><!-- container-form -->
+</body>
+<script src="../public/JS/JQuery.js"></script>
+<script src="../public/JS/user_js/create.js"></script>
+</html>
