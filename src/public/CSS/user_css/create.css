@@ -112,7 +112,7 @@ form .container-input .input-wraper{
 }
 
 .focus-input{
-    top: -15px;
+    top: -15px !important;
 }
 
 .button-wraper{
@@ -153,4 +153,8 @@ form .container-input .input-wraper{
 
 .container-input .login p a:hover{
     text-decoration: underline;
+}
+
+.view-pass::before{
+    content: "";
 }
