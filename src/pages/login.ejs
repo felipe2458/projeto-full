@@ -15,19 +15,29 @@
         <header><h1>Login</h1></header>
 
         <div class="container-input">
-            <div class="input-wraper">
-                <div class="container-input-label">
-                    <input type="text" name="name_login" id="name_login">
-                <label for="name_login">Username</label>
-                </div><!-- container-input-label -->
-            </div><!-- input-wraper -->
+            <div class="container-err-input">
+                <div class="input-wraper" id="container-name">
+                    <div class="container-input-label">
+                        <input type="text" name="name_login" id="name_login">
+                    <label for="name_login" id="name_login_label">Username</label>
+                    </div><!-- container-input-label -->
+                </div><!-- input-wraper -->
+                <div class="err-msg-wraper">
+                    <p class="erro-msg" id="name_err">O campo não pode estar vazio.</p>
+                </div><!-- err-msg-wraper -->
+            </div><!-- container-err-input -->
 
-            <div class="input-wraper">
-                <div class="container-input-label">
-                    <input type="text" name="password_login" id="password_login">
-                    <label for="password_login">Password</label>
-                </div><!-- container-input-label -->
-            </div><!-- input-wraper -->
+            <div class="container-err-input">
+                <div class="input-wraper" id="container-password">
+                    <div class="container-input-label">
+                        <input type="password" name="password_login" id="password_login">
+                        <label for="password_login" id="password_login_label">Password</label>
+                    </div><!-- container-input-label -->
+                </div><!-- input-wraper -->
+                <div class="err-msg-wraper segundo">
+                    <p class="erro-msg" id="password_err">O campo não pode estar vazio.</p>
+                </div><!-- err-msg-wraper -->
+            </div><!-- container-err-input -->
 
             <div class="remember">
                 <input type="checkbox" name="remember" id="remember">
