@@ -67,6 +67,10 @@ app.get('/login', (req, res)=>{
     res.render('login.ejs');
 });
 
+app.post('/login', (req, res)=>{
+    res.redirect('/');
+});
+
 app.listen(3090, ()=>{
     console.log('Server is running!');
 });
