@@ -63,6 +63,13 @@ $(function(){
                 root.css('--box-shadow-color-input_three', '#a10000');
                 enviPass = false;
                 enviPassConfirm = false;
+            }else if(passConfirmVal === passVal && passVal.length < 8 && passVal.length > 0){
+                root.css('--box-shadow-color-input_two', '#a10000');
+                root.css('--box-shadow-color-input_three', '#a10000');
+                errorMsg.text('A senha tem que ter entre 8 e 50 caracteres.');
+                errorMsgConfirm.text('A seha tem que ter entre 8 e 50 caracteres.');
+                enviPass = false;
+                enviPassConfirm = false;
             }else if(passVal.length < 50 && passVal.length > 8){
                 errorMsg.text('');
                 root.css('--box-shadow-color-input_two', '#00e000');
@@ -75,11 +82,29 @@ $(function(){
             const errorMsgPass = $('.erro-msg').eq(1);
             const errorMsgPassConfirm = $('.erro-msg').eq(2);
 
-            if(passConfirmVal !== passVal){
+            if(passVal.length === 0 && passConfirmVal.length === 0){
+                root.css('--box-shadow-color-input_two', '#8f8f8f');
+                root.css('--box-shadow-color-input_three', '#8f8f8f');
+                errorMsgPass.text('');
+                errorMsgPassConfirm.text('');
+                enviPass = false;
+                enviPassConfirm = false;
+            }else if(passConfirmVal !== passVal){
                 root.css('--box-shadow-color-input_two', '#a10000');
                 root.css('--box-shadow-color-input_three', '#a10000');
-                errorMsgPass.text('As senhas não coincidem.');
+                if(passVal.length > 8){
+                    errorMsgPass.text('As senhas não coincidem.');
+                }else{
+                    errorMsgPass.text('A senha tem que ter entre 8 e 50 caracteres.');
+                }
                 errorMsgPassConfirm.text('As senhas não coincidem.');
+                enviPass = false;
+                enviPassConfirm = false;
+            }else if(passConfirmVal === passVal && passVal.length < 8 && passVal.length > 0){
+                root.css('--box-shadow-color-input_two', '#a10000');
+                root.css('--box-shadow-color-input_three', '#a10000');
+                errorMsgPass.text('A senha tem que ter entre 8 e 50 caracteres.');
+                errorMsgPassConfirm.text('A seha tem que ter entre 8 e 50 caracteres.');
                 enviPass = false;
                 enviPassConfirm = false;
             }else{
@@ -120,7 +145,7 @@ $(function(){
         validateForm.password_confirm();
     });
 
-    $(password_confirm).on('input', function(){
+    $(password_confirm).on('input', async function(){
         validateForm.password();
         validateForm.password_confirm();
     });
