@@ -185,10 +185,6 @@ form .container-input .input-wraper{
     text-decoration: underline;
 }
 
-/*.view-pass::before{
-    content: "";
-}*/
-
 .container-input-err .erro-msg-wraper{
     width: 100%;
     padding: 5px 0 0 65px;
