@@ -4,22 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../public/images/icons/icon_principal.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../public/CSS/user_css/create.css">
     <title>Criar usuário</title>
 </head>
 <body>
-    <div class="container-form">
-        <form method="post" action="/create-user">
-            <h1>Crie seu usuário</h1>
+    <form method="post" action="/create-user">
+        <header><h1>Register</h1></header>
 
-            <div class="container-input">
-                <input type="text" name="name" id="name" placeholder="User">
-                <input type="text" name="password" id="password" placeholder="password">
-                <!--<input type="text" name="password_confirmation" id="password_confirmation" placeholder="confirm password">-->
-                <input type="submit" value="Criar">
-            </div>
-        </form>
-    </div><!-- container-form -->
+        <div class="container-input">
+            <div class="input-wraper">
+                <div class="wraper-container-input">
+                    <input type="text" name="name" id="name">
+                    <div class="icon"></div>
+                    <label for="name">Username</label>
+                </div><!-- wraper-container-input -->
+            </div><!-- input-wraper -->
+
+            <div class="input-wraper">
+                <div class="wraper-container-input">
+                    <input type="password" name="password" id="password">
+                    <div class="icon icon-pass"></div>
+                    <label for="password">Password</label>
+                </div><!-- wraper-container-input -->
+            </div><!-- input-wraper -->
+
+            <div class="input-wraper">
+                <div class="wraper-container-input">
+                    <input type="password" name="password-confirm" id="password-confirm">
+                    <div class="icon icon-pass"></div>
+                    <label for="password-confirm">Confirm Password</label>
+                </div><!-- wraper-container-input -->
+            </div><!-- input-wraper -->
+
+            <div class="button-wraper">
+                <input type="submit" name="action" value="Create">
+            </div><!-- button-wraper -->
+
+            <div class="login">
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div><!-- login -->
+        </div><!-- container-input -->
+    </form>
 </body>
 <script src="../public/JS/JQuery.js"></script>
 <script src="../public/JS/user_js/create.js"></script>
