@@ -37,14 +37,14 @@ app.get('/', (req, res)=>{
     res.render('home.ejs');
 });
 
-app.get('/create-user', (req, res)=>{
-    res.render('create_user.ejs');
+app.get('/register', (req, res)=>{
+    res.render('register_user.ejs');
 });
 
-app.post('/create-user', async (req, res)=>{
+app.post('/register', async (req, res)=>{
     try{
         if(await User.findOne({name: req.body.name.trim()})){
-            res.redirect('/create-user');
+            res.redirect('/register');
         }else{
             const pass = await bcrypt.hash(req.body.password.trim(), 10);
 
@@ -86,6 +86,14 @@ app.post('/login', async (req, res)=>{
     }catch(err){
         console.log('Erro ao validar login:', err);
         return res.status(500).send('Erro ao validar login. Tente novamente. <a href="/">Voltar</a>');
+    }
+});
+
+app.get('/page-initial', (req, res)=>{
+    if(req.session.user){
+        return res.send('Olá ' + req.session.user.name);
+    }else{
+        return res.redirect('/login');
     }
 });
 
