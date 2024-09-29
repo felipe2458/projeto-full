@@ -43,14 +43,14 @@ app.get('/create-user', (req, res)=>{
 
 app.post('/create-user', async (req, res)=>{
     try{
-        if(await User.findOne({name: req.body.name})){
+        if(await User.findOne({name: req.body.name.trim()})){
             res.redirect('/create-user');
         }else{
-            const pass = await bcrypt.hash(req.body.password, 10);
+            const pass = await bcrypt.hash(req.body.password.trim(), 10);
 
             User.create({
                 _id: new mongoose.Types.ObjectId(),
-                name: req.body.name,
+                name: req.body.name.trim(),
                 password: pass
             }).then(()=>{
                 res.redirect('/login');
@@ -67,8 +67,26 @@ app.get('/login', (req, res)=>{
     res.render('login.ejs');
 });
 
-app.post('/login', (req, res)=>{
-    res.redirect('/');
+app.post('/login', async (req, res)=>{
+    try{
+        const user = await User.findOne({
+            name: req.body.name_login.trim()
+        });
+
+        if(!user){
+            return res.redirect('/login');
+        }
+
+        if(bcrypt.compare(req.body.password_login.trim(), user.password)){
+            req.session.user = user;
+            return res.redirect('/page-initial');
+        }else{
+            return res.redirect('/login');
+        }
+    }catch(err){
+        console.log('Erro ao validar login:', err);
+        return res.status(500).send('Erro ao validar login. Tente novamente. <a href="/">Voltar</a>');
+    }
 });
 
 app.listen(3090, ()=>{
