@@ -115,6 +115,22 @@ $(function(){
                 enviPass = true;
                 enviPassConfirm = true;
             }
+        },
+        formValid: function(input){
+            const errorMsg = $('.erro-msg');
+
+            if(input.val().trim() === ''){
+                if(input.attr('id') === 'name'){
+                    errorMsg.eq(0).text('O campo não pode estar vazio.');
+                    root.css('--box-shadow-color-input_one', '#a10000');
+                }else if(input.attr('id') === 'password'){
+                    errorMsg.eq(1).text('O campo não pode estar vazio.');
+                    root.css('--box-shadow-color-input_two', '#a10000');
+                }else if(password.val().trim() === ''){
+                    errorMsg.eq(2).text('O campo não pode estar vazio.');
+                    root.css('--box-shadow-color-input_three', '#a10000');
+                }
+            }
         }
     }
 
@@ -157,6 +173,9 @@ $(function(){
             return true;
         }else{
             e.preventDefault();
+            validateForm.formValid(name);
+            validateForm.formValid(password);
+            validateForm.formValid(password_confirm);
             return false;
         }
     });

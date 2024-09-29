@@ -91,14 +91,17 @@ form .container-input .input-wraper{
 
 #name{
     box-shadow: 0 0 3px var(--box-shadow-color-input_one);
+    color: var(--box-shadow-color-input_one);
 }
 
 #password{
     box-shadow: 0 0 3px var(--box-shadow-color-input_two);
+    color: var(--box-shadow-color-input_two);
 }
 
 #password-confirm{
     box-shadow: 0 0 3px var(--box-shadow-color-input_three);
+    color: var(--box-shadow-color-input_three);
 }
 
 #name:focus{
