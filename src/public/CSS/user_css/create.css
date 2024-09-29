@@ -198,3 +198,15 @@ form .container-input .input-wraper{
     text-shadow: 0 0 2px red, 0 0 4px red;
     font-size: 13px;
 }
+
+.view-password::before{
+    content: "";
+    width: 3px;
+    height: 100%;
+    background-color: whitesmoke;
+    display: block;
+    position: relative;
+    left: calc(50% - 1.5px);
+    top: 2px;
+    transform: rotate(45deg) translateX(-50%);
+}

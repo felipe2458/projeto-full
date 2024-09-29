@@ -134,6 +134,19 @@ $(function(){
         }
     }
 
+    function viewPassword(pass){
+        const passIcon = $('#' + pass.attr('id') + '-icon');
+
+        passIcon.click(function(){
+            pass.attr('type', pass.attr('type') === 'password' ? 'text' : 'password');
+
+            passIcon.toggleClass('view-password');
+        });
+    }
+
+    viewPassword(password);
+    viewPassword(password_confirm);
+
     $(name).focus(function(){
         focusInput($(this));
     }).blur(function(){
