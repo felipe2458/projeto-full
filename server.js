@@ -91,10 +91,35 @@ app.post('/login', async (req, res)=>{
 
 app.get('/page-initial', (req, res)=>{
     if(req.session.user){
-        return res.send('Olá ' + req.session.user.name);
+        return res.render('page_initial.ejs', {user: req.session.user.name});
     }else{
         return res.redirect('/login');
     }
+});
+
+app.get('/admin-users', (req, res)=>{
+    if(req.session.user.name === 'felipe_e2458'){
+        User.find({}).exec((err, users)=>{
+            users = users.map((val)=>{
+                return {
+                    _id: val._id,
+                    name: val.name,
+                }
+            });
+
+            res.render('adm_users.ejs', {users: users});
+        });
+    }else{
+        res.redirect('/login');
+    }
+});
+
+app.get('/admin-users/delete/:id', (req, res)=>{
+    User.findByIdAndDelete(req.params.id).then(result =>{
+        res.redirect('/admin-users');
+    }).catch(err =>{
+        res.status(500).send('Erro ao tentar deletar usuário:' + err);
+    });
 });
 
 app.listen(3090, ()=>{
