@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/CSS/page_initial.css">
+    <title>Pagina inicial</title>
+</head>
+<body>
+    <header>
+        <nav class="menu-nav">
+            <ul>
+                <% if(user === 'felipe_e2458'){ %>
+                    <li><a href="/admin-users">Administração de usuários</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+</body>
+<script src="../public/JS/JQuery.js"></script>
+<script src="../public/JS/page_initial.js"></script>
+</html>
