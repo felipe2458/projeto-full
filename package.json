@@ -6,7 +6,7 @@
     "startServer": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Felipe Alves",
   "license": "ISC",
   "description": "",
   "dependencies": {

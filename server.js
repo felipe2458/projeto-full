@@ -93,12 +93,17 @@ app.post('/login', async (req, res)=>{
 
 app.get('/page-initial', (req, res)=>{
     if(req.session.user){
+<<<<<<< HEAD
         return res.render('page_initial.ejs');
+=======
+        return res.render('page_initial.ejs', {user: req.session.user.name});
+>>>>>>> e4bf01599e5e027f350d927bacc1b2700b0956cf
     }else{
         return res.redirect('/login');
     }
 });
 
+<<<<<<< HEAD
 app.get('/chat', (req, res)=>{
     if(!req.session.user){
         return res.redirect('/login');
@@ -153,4 +158,33 @@ const PORT = process.env.PORT || 3090;
 
 server.listen(PORT, ()=>{
     console.log(`Servidor rodando na porta: ${PORT}`);
+=======
+app.get('/admin-users', (req, res)=>{
+    if(req.session.user.name === 'felipe_e2458'){
+        User.find({}).exec((err, users)=>{
+            users = users.map((val)=>{
+                return {
+                    _id: val._id,
+                    name: val.name,
+                }
+            });
+
+            res.render('adm_users.ejs', {users: users});
+        });
+    }else{
+        res.redirect('/login');
+    }
+});
+
+app.get('/admin-users/delete/:id', (req, res)=>{
+    User.findByIdAndDelete(req.params.id).then(result =>{
+        res.redirect('/admin-users');
+    }).catch(err =>{
+        res.status(500).send('Erro ao tentar deletar usuário:' + err);
+    });
+});
+
+app.listen(3090, ()=>{
+    console.log('Server is running!');
+>>>>>>> e4bf01599e5e027f350d927bacc1b2700b0956cf
 });
