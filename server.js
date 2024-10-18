@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const http = require('http');
+const socketIO = require('socket.io');
 const User = require('./mongoose/User');
 
 mongoose.connect('mongodb+srv://root:q8n7MKjqbgluikbZ@cluster0.zsdig.mongodb.net/Project-full?retryWrites=true&w=majority&appName=Cluster0' ,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
@@ -77,7 +79,7 @@ app.post('/login', async (req, res)=>{
             return res.redirect('/login');
         }
 
-        if(bcrypt.compare(req.body.password_login.trim(), user.password)){
+        if(await bcrypt.compare(req.body.password_login.trim(), user.password)){
             req.session.user = user;
             return res.redirect('/page-initial');
         }else{
@@ -91,12 +93,64 @@ app.post('/login', async (req, res)=>{
 
 app.get('/page-initial', (req, res)=>{
     if(req.session.user){
-        return res.send('Olá ' + req.session.user.name);
+        return res.render('page_initial.ejs');
     }else{
         return res.redirect('/login');
     }
 });
 
-app.listen(3090, ()=>{
-    console.log('Server is running!');
+app.get('/chat', (req, res)=>{
+    if(!req.session.user){
+        return res.redirect('/login');
+    }else{
+        return res.render('chat.ejs', {username: req.session.user.name});
+    }
+});
+
+let users = {
+    nome: [],
+    socket_id: []
+};
+
+const server = http.createServer(app);
+const io = socketIO(server);
+
+io.on('connection', (socket)=>{
+    console.log('Um novo usuário conectado');
+
+    socket.on('user connected', (nomeUsuario)=>{
+        if(!users.nome.includes(nomeUsuario)){
+            users.nome.push(nomeUsuario);
+            users.socket_id.push(socket.id);
+            console.log(`Usuário ${nomeUsuario} adicionado com o socket_id: ${socket.id}`);
+        }
+    });
+
+    socket.on('chat message', (obj)=>{
+        const userIndex = users.nome.indexOf(obj.nome);
+        const socketIndex = users.socket_id.indexOf(socket.id);
+
+        if(userIndex !== -1 && socketIndex !== -1){
+            io.emit('chat message', obj);
+        }else{
+            console.log('Error: Você não tem permissão para executar esta ação');
+        }
+    });
+
+    socket.on('disconnect', ()=>{
+        const index = users.socket_id.indexOf(socket.id);
+
+        if(index !== -1){
+            console.log(`Usuário ${users.nome[index]} desconectado`);
+            users.nome.splice(index, 1);
+            users.socket_id.splice(index, 1);
+        }
+    });
+
+});
+
+const PORT = process.env.PORT || 3090;
+
+server.listen(PORT, ()=>{
+    console.log(`Servidor rodando na porta: ${PORT}`);
 });

@@ -1,0 +1,1 @@
+socket.emit('user connected', username);

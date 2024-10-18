@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/CSS/chat.css">
+    <title>Chat</title>
+</head>
+<body>
+    <h1>Seja bem vindo ao Chat Global! <%= username %></h1>
+</body>
+<script src="../public/JS/JQuery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    const username = '<%= username %>'
+</script>
+<script src="../public/JS/chat.js"></script>
+</html>
